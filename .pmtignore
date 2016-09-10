@@ -1,0 +1,6 @@
+examples
+modules
+.bundle
+.librarian
+.tmp
+pkg

@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "author": "edson",
   "summary": "",
-  "license": "Apache License",
+  "license": "Apache License Version 2.0",
   "source": "https://github.com/edson-a-soares/puppet-php7",
   "project_page": "https://github.com/edson-a-soares/puppet-php7",
   "issues_url": "https://github.com/edson-a-soares/puppet-php7/issues",
-  "description": "A Puppet module to download and install PHP7 and its packages.",
+  "description": "A Puppet module to download, install and configure PHP7 and its packages.",
   "dependencies": [
     {
       "name": "puppetlabs/apt",
@@ -25,7 +25,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">=3.0.0"
+      "version_requirement": ">=3.4.0"
     }
   ]
 }
