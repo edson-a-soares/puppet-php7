@@ -7,25 +7,27 @@ A Puppet recipe to install and configure PHP 7 and its packages.
 ###Usage
 
 **Installing PHP7**
-```puppet
+~~~
     include php7::install
-```puppet
+~~~
 
 **Installing PHP7 Packages**
-```puppet
+~~~
     php7::package { "php7.0-mysql": }
     php7::package { "php7.0-curl": }
     php7::package { "php7.0-mcrypt": }
-```puppet
+~~~
+
 or
-```puppet
+
+~~~
     php7::package { "php7.0-mysql php7.0-curl php7.0-mcrypt": }
-```puppet
+~~~
 
 **Add PHPInfo file**
-```puppet
+~~~
     php7::phpinfo { "/var/www/html": }
-```puppet  
+~~~
 
 ###Dependencies
  * puppetlabs/apt
