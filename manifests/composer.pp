@@ -5,7 +5,7 @@ define php7::composer ($directory = $title, $home_user, $filename = 'composer.ph
   exec { "composer-downloading":
       command => "php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\"",
       cwd     => "/home/$home_user",
-      onlyif  => "test ! -f /home/$home_user/composer-setup.php",
+      onlyif  => "test ! -f $directory/$filename",
       path    => [ "/bin", "/usr/local/bin", "/usr/bin" ],
       notify  => Exec[ "composer-checking" ],
   } ->
@@ -24,6 +24,7 @@ define php7::composer ($directory = $title, $home_user, $filename = 'composer.ph
       cwd         => "/home/$home_user",
       group       => $group,
       user        => root,
+      notify      => Exec[ "composer-self-update" ],
       environment => [ "HOME=/home/$home_user COMPOSER_HOME=/home/$home_user" ],
       path        => [ "/bin", "/usr/local/bin", "/usr/bin" ],
   } ->
@@ -39,6 +40,8 @@ define php7::composer ($directory = $title, $home_user, $filename = 'composer.ph
   exec { "composer-self-update":
     command     => "$directory/$filename self-update",
     environment => [ "HOME=/home/$home_user COMPOSER_HOME=/home/$home_user" ],
+    subscribe   => Exec[ "composer-setup" ],
+    refreshonly => true,
     path        => [ "/bin", "/usr/local/bin", "/usr/bin" ],
   }
 
