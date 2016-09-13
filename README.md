@@ -29,8 +29,15 @@ or
     php7::phpinfo { "/var/www/html": }
 ~~~
 
-###Dependencies
- * puppetlabs/apt
+**Composer**
+~~~
+    php7::composer { "/usr/local/bin":
+        home_user => "vagrant",
+        filename  => "composer"
+    }
+
+~~~
+
 
 ### Limitations
 This module has been tested only on Ubuntu 14.04 Trusty using Puppet versions 3.4 and later.
