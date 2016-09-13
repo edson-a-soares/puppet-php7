@@ -1,11 +1,10 @@
 class php7::install {
 
-  include apt
-
-  apt::ppa { 'ppa:ondrej/php': } ->
+  include php7
 
   package { "php7.0":
-    ensure => installed
+    ensure  => installed,
+    require => Class[ "php7" ]
   }
 
 }

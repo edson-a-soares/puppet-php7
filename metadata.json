@@ -8,12 +8,7 @@
   "project_page": "https://github.com/edson-a-soares/puppet-php7",
   "issues_url": "https://github.com/edson-a-soares/puppet-php7/issues",
   "description": "A Puppet module to download, install and configure PHP7 and its packages.",
-  "dependencies": [
-    {
-      "name": "puppetlabs/apt",
-      "version_requirement": ">=1.4.0"
-    }
-  ],
+  "dependencies": [ ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Ubuntu",
