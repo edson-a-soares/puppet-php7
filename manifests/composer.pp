@@ -4,22 +4,23 @@ define php7::composer ($directory = $title, $home_user, $filename = 'composer.ph
 
   $composer_file_name = "composer-setup.php"
 
+  file { "/home/$home_user/composer-checking-script.sh":
+    source  => "puppet:///modules/php7/composer/composer-checking-script.sh",
+    ensure  => present,
+    owner   => $home_user,
+    group   => $group,
+    mode    => "+x",
+  } ->
+
   exec { "composer-downloading":
-    command => "wget https://getcomposer.org/installer --directory-prefix=/home/$home_user -O $composer_file_name",
+    command => "sudo wget https://getcomposer.org/installer -O /home/$home_user/$composer_file_name",
     onlyif  => "test ! -f $directory/$filename",
     path    => [ "/bin", "/usr/local/bin", "/usr/bin" ],
     notify  => Exec[ "composer-checking" ],
   } ->
 
-  file { "/home/$home_user/composer-checking-script.sh":
-    source  => "puppet:///modules/php7/composer/composer-checking-script.sh",
-    ensure  => present,
-    owner   => $home_user,
-    mode    => "+x",
-  } ->
-
   exec { "composer-checking":
-    command     => "sudo bash /home/$home_user/composer-checking-script.sh $composer_file_name",
+    command     => "sudo bash /home/$home_user/composer-checking-script.sh /home/$home_user $composer_file_name",
     provider    => shell,
     timeout     => 2500,
     user        => $home_user,

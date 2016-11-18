@@ -1,14 +1,15 @@
 #!/bin/sh
 
-filename=$1
+path=$1
+filename=$2
 
-EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
-ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', '$filename');")
+EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig --directory-prefix=$path)
+ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', '$path/$filename');")
 
 if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
 then
     >&2 echo 'ERROR: Invalid installer signature'
-    rm $filename
+    rm $path/$filename
     exit 1
 fi
 
