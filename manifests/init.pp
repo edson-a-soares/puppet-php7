@@ -1,9 +1,11 @@
 class php7 {
 
+  $hash_key = "4F4EA0AAE5267A6C"
+
   exec { "adding-additional-tools":
-      command => "sudo apt-get install --yes software-properties-common",
-      onlyif  => "test ! -f /usr/bin/add-apt-repository",
-      path    => [ "/bin", "/usr/bin", "/usr/local/bin" ],
+    command => "sudo apt-get install --yes software-properties-common",
+    onlyif  => "test ! -f /usr/bin/add-apt-repository",
+    path    => [ "/bin", "/usr/bin", "/usr/local/bin" ],
   } ->
 
   exec { "add-language-pack":
@@ -20,7 +22,7 @@ class php7 {
   } ->
 
   exec { "apt-key-repository":
-    command     => "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C",
+    command     => "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv $hash_key",
     subscribe   => Exec[ "add-php7-repository" ],
     refreshonly => true,
     path        => [ "/bin", "/usr/bin", "/usr/local/bin" ],
