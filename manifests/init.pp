@@ -28,7 +28,7 @@ class php7 {
     path        => [ "/bin", "/usr/bin", "/usr/local/bin" ],
   }
 
-  exec { "apt-update":
+  exec { "php7-repositories-apt-update":
     command     => "sudo apt-get update",
     require     => Exec[ "apt-key-repository" ],
     subscribe   => Exec[ "add-php7-repository" ],
