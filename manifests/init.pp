@@ -17,7 +17,7 @@ class php7 {
   exec { "add-php7-repository":
     command => "sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php",
     onlyif  => "test ! -f /etc/apt/sources.list.d/ondrej-php-trusty.list",
-    notify  => Exec[ "apt-key-repository", "apt-update" ],
+    notify  => Exec[ "apt-key-repository", "php7-repositories-apt-update" ],
     path    => [ "/bin", "/usr/bin", "/usr/local/bin" ],
   } ->
 
